@@ -1,15 +1,17 @@
-@if(items.length === 0) {
-  <div>There are no wishes to display.</div>
-} @else {
-  <ul class="wish-List">
-    @for (item of items; track $index) {
-      <li>
-        <div class="form-check">
-          <label class="form-check-label">
-            <input class="checkbox" type="checkbox" /> {{ $index + 1 }}. {{ item.wishText }}
-          </label>
-        </div>
-      </li>
-    }
-  </ul>
-}
+<div class="container">
+  <add-wish-form
+  (addWish)="items.push($event)">
+  </add-wish-form>
+
+  <div class="row nt-3">
+    <wish-filter
+    (filter)="filter = $event"> 
+    </wish-filter>
+  </div>
+
+  <div class="row nt-3">
+    <wish-list
+      [wishes]="items.filter(filter)"
+    ></wish-list>
+  </div>
+</div>
